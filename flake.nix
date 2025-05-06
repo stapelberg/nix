@@ -1,0 +1,11 @@
+{
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs";
+  };
+
+  outputs = { self, nixpkgs, ... }: {
+    lib.userSettings = import ./user-settings.nix;
+    lib.systemdNetwork = import ./systemd-network.nix;
+    lib.systemdBoot = import ./systemd-boot.nix;
+  };
+}
