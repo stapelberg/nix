@@ -10,9 +10,6 @@ in
 
     # Export metrics from text files as well so that we can
     # export the mtime of /nix/store
-    #
-    # TODO: can we somehow tell NixOS to restart the prometheus-exporter
-    # on each nixos-rebuild switch?
     enabledCollectors = [ "textfile" ];
     extraFlags = [
       "--collector.textfile.directory=/run/prometheus-node-exporter/textfile/"
@@ -29,5 +26,13 @@ in
       # export the mtime of /nix/store
       ExecStartPre = "${export-mtime}/bin/export-mtime";
     };
+  };
+
+  # Ensure the exported mtime is refreshed on each nixos-rebuild switch,
+  # even when the prometheus-node-exporter does not change.
+  system.activationScripts."nix-export-mtime" = {
+    text = ''
+${pkgs.systemd}/bin/systemctl restart prometheus-node-exporter.service
+'';
   };
 }
