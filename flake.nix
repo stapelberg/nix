@@ -7,5 +7,6 @@
     lib.userSettings = import ./user-settings.nix;
     lib.systemdNetwork = import ./systemd-network.nix;
     lib.systemdBoot = import ./systemd-boot.nix;
+    lib.prometheusNode = import ./prometheus-node.nix;
   };
 }
