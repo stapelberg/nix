@@ -33,6 +33,7 @@
     wget
     curl
     rxvt-unicode  # for terminfo
+    btop
   ];
 
   programs.zsh.enable = true;
