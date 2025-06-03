@@ -34,6 +34,7 @@
     curl
     rxvt-unicode  # for terminfo
     btop
+    dool  # dstat clone
   ];
 
   programs.zsh.enable = true;
