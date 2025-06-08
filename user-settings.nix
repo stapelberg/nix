@@ -35,6 +35,7 @@
     rxvt-unicode  # for terminfo
     btop
     dool  # dstat clone
+    ncdu  # often useful to get a sense of data
   ];
 
   programs.zsh.enable = true;
