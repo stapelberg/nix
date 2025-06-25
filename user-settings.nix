@@ -21,21 +21,21 @@
     description = "Michael Stapelberg";
     extraGroups = [ "wheel" ];
     shell = pkgs.zsh;
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
   };
 
   environment.systemPackages = with pkgs; [
-    git  # for checking out github.com/stapelberg/configfiles
+    git # for checking out github.com/stapelberg/configfiles
     rsync
     zsh
     vim
     emacs
     wget
     curl
-    rxvt-unicode  # for terminfo
+    rxvt-unicode # for terminfo
     btop
-    dool  # dstat clone
-    ncdu  # often useful to get a sense of data
+    dool # dstat clone
+    ncdu # often useful to get a sense of data
   ];
 
   programs.zsh.enable = true;
