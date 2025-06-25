@@ -29,7 +29,18 @@
     rsync
     zsh
     vim
-    emacs
+    (emacs.pkgs.withPackages (epkgs: [
+      epkgs.nix-mode
+      epkgs.counsel
+      epkgs.counsel-projectile
+      epkgs.eglot
+      epkgs.magit
+      epkgs.magit-popup
+      epkgs.org
+      epkgs.projectile
+      epkgs.smex
+      epkgs.window-purpose
+    ]))
     wget
     curl
     rxvt-unicode # for terminfo
