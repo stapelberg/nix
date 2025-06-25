@@ -1,7 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  services.resolved.enable = true;
+  services.resolved = {
+    enable = true;
+    llmnr = "false";
+  };
   networking.useDHCP = false;
   systemd.network.enable = true;
 
