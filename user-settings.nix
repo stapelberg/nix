@@ -29,17 +29,17 @@
     rsync
     zsh
     vim
-    (emacs.pkgs.withPackages (epkgs: [
-      epkgs.nix-mode
-      epkgs.counsel
-      epkgs.counsel-projectile
-      epkgs.eglot
-      epkgs.magit
-      epkgs.magit-popup
-      epkgs.org
-      epkgs.projectile
-      epkgs.smex
-      epkgs.window-purpose
+    (emacs.pkgs.withPackages (epkgs: with epkgs; [
+      nix-mode
+      counsel
+      counsel-projectile
+      eglot
+      magit
+      magit-popup
+      org
+      projectile
+      smex
+      window-purpose
     ]))
     wget
     curl
