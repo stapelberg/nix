@@ -34,6 +34,7 @@
       counsel
       counsel-projectile
       eglot
+      go-mode
       magit
       magit-popup
       org
