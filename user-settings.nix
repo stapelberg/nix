@@ -37,6 +37,7 @@
       go-mode
       magit
       magit-popup
+      markdown-mode
       org
       projectile
       smex
