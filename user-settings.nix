@@ -42,6 +42,7 @@
       projectile
       smex
       window-purpose
+      ag
     ]))
     wget
     curl
