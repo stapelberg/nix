@@ -35,6 +35,7 @@
       counsel-projectile
       eglot
       go-mode
+      gotest # for go-test-current-test
       magit
       magit-popup
       markdown-mode
