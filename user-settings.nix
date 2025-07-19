@@ -44,6 +44,7 @@
       smex
       window-purpose
       ag
+      ledger-mode
     ]))
     wget
     curl
