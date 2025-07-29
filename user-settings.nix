@@ -52,6 +52,7 @@
     btop
     dool # dstat clone
     ncdu # often useful to get a sense of data
+    lsof
   ];
 
   programs.zsh.enable = true;
