@@ -32,7 +32,7 @@ in
   # even when the prometheus-node-exporter does not change.
   system.activationScripts."nix-export-mtime" = {
     text = ''
-${pkgs.systemd}/bin/systemctl restart prometheus-node-exporter.service || true
-'';
+      ${pkgs.systemd}/bin/systemctl restart prometheus-node-exporter.service || true
+    '';
   };
 }

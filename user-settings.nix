@@ -46,10 +46,16 @@
 
   # Adding michael as trusted user means
   # we can upgrade the system via SSH (see Makefile).
-  nix.settings.trusted-users = [ "michael" "root" ];
+  nix.settings.trusted-users = [
+    "michael"
+    "root"
+  ];
 
   # Enable flakes for interactive usage.
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Clean the Nix store every week.
   nix.gc = {

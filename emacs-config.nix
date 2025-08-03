@@ -1,7 +1,7 @@
 { pkgs }:
 
-pkgs.emacs.pkgs.withPackages (epkgs:
-  with epkgs; [
+pkgs.emacs.pkgs.withPackages (
+  epkgs: with epkgs; [
     nix-mode
     counsel
     counsel-projectile
@@ -17,4 +17,5 @@ pkgs.emacs.pkgs.withPackages (epkgs:
     window-purpose
     ag
     ledger-mode
-  ])
+  ]
+)
