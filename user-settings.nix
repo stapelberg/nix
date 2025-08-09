@@ -39,6 +39,7 @@
     dool # dstat clone
     ncdu # often useful to get a sense of data
     lsof
+    psmisc # for killall
   ];
 
   programs.zsh.enable = true;
