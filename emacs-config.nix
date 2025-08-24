@@ -17,5 +17,6 @@ pkgs.emacs.pkgs.withPackages (
     window-purpose
     ag
     ledger-mode
+    vterm
   ]
 )
