@@ -18,5 +18,6 @@ pkgs.emacs.pkgs.withPackages (
     ag
     ledger-mode
     vterm
+    notmuch
   ]
 )
