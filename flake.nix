@@ -7,6 +7,7 @@
     { self, nixpkgs, ... }:
     {
       lib.userSettings = import ./user-settings.nix;
+      lib.zshConfig = import ./zsh-config.nix;
       lib.systemdNetwork = import ./systemd-network.nix;
       lib.systemdBoot = import ./systemd-boot.nix;
       lib.prometheusNode = import ./prometheus-node.nix;
