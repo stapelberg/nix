@@ -13,6 +13,8 @@
       lib.prometheusNode = import ./prometheus-node.nix;
       lib.emacsWithPackages = import ./emacs-config.nix;
 
+      overlays.goVcsStamping = (import ./go-vcs-stamping.nix { inherit (nixpkgs) lib; }).overlay;
+
       formatter = nixpkgs.lib.genAttrs [
         "x86_64-linux"
         "aarch64-linux"
