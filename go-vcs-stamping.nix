@@ -13,6 +13,11 @@
 # fields in `debug.ReadBuildInfo()` — without requiring `.git/` in the
 # source tree.
 #
+# For sources from the `git` InputScheme with a dirty working directory,
+# the flake input has `.dirtyRev` (e.g. "abc123...-dirty") instead of `.rev`.
+# The overlay automatically strips the "-dirty" suffix and stamps the binary
+# with `vcs.modified=true`.
+#
 # For patched/synthetic sources that lack `.rev`, specify explicitly:
 #
 #   buildGoModule {
@@ -38,12 +43,21 @@
 { lib }:
 
 let
-  # Detect VCS metadata from src if it's a flake input (has .rev + .lastModified).
+  # Detect VCS metadata from src if it's a flake input.
+  # Clean sources (git/github InputScheme) have .rev + .lastModified.
+  # Dirty sources (git InputScheme with uncommitted changes) have
+  # .dirtyRev (e.g. "abc123...-dirty") + .lastModified but no .rev.
   detectVcsMetadata =
     src:
     if builtins.isAttrs src && src ? rev && src ? lastModified then
       {
         inherit (src) rev lastModified;
+      }
+    else if builtins.isAttrs src && src ? dirtyRev && src ? lastModified then
+      {
+        rev = lib.removeSuffix "-dirty" src.dirtyRev;
+        inherit (src) lastModified;
+        dirty = true;
       }
     else
       null;
@@ -76,16 +90,18 @@ let
               assert lib.asserts.assertMsg (builtins.isInt vcsMetadata.lastModified)
                 "go-vcs-stamping: lastModified must be an integer";
               toString vcsMetadata.lastModified;
-            # If patches are applied, report vcs.modified=true so the binary
-            # honestly reflects that the source differs from the commit.
+            # Report vcs.modified=true when the source differs from the commit:
+            # either Nix patches are applied, or the source was a dirty working dir.
+            isDirty = vcsMetadata.dirty or false;
             isPatched = (args.patches or [ ]) != [ ];
+            isModified = isDirty || isPatched;
           in
           {
             preConfigure =
               (if args ? preConfigure && args.preConfigure != null then args.preConfigure else "")
               + ''
                               # === go-vcs-stamping.nix ===
-                              # Stamp Go binaries with VCS metadata (rev=${lib.strings.substring 0 12 rev}).
+                              # Stamp Go binaries with VCS metadata (rev=${lib.strings.substring 0 12 rev}${lib.optionalString isModified ", modified"}).
                               export GOFLAGS="''${GOFLAGS:+$GOFLAGS }-buildvcs=true"
 
                               if [ -d .git ] || [ -f .git ]; then
@@ -131,7 +147,7 @@ let
                 # build loudly so you know to update it.
                 case "\$*" in
                   "status --porcelain")
-                    ${lib.optionalString isPatched ''echo "M patched"''}
+                    ${lib.optionalString isModified ''echo "M patched"''}
                     exit 0
                     ;;
                   *"log -1 --format=%H:%ct"*)
