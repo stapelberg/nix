@@ -1,10 +1,20 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs";
+
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    { self, nixpkgs, ... }:
+    {
+      self,
+      nixpkgs,
+      nix-index-database,
+      ...
+    }:
     {
       lib.userSettings = import ./user-settings.nix;
       lib.zshConfig = import ./zsh-config.nix;
@@ -12,6 +22,7 @@
       lib.systemdBoot = import ./systemd-boot.nix;
       lib.prometheusNode = import ./prometheus-node.nix;
       lib.emacsWithPackages = import ./emacs-config.nix;
+      lib.enableComma = import ./enable-comma.nix { inherit nix-index-database; };
 
       overlays.goVcsStamping = (import ./go-vcs-stamping.nix { inherit (nixpkgs) lib; }).overlay;
 
