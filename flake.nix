@@ -22,6 +22,7 @@
       lib.systemdBoot = import ./systemd-boot.nix;
       lib.prometheusNode = import ./prometheus-node.nix;
       lib.journalUpload = import ./journal-upload.nix;
+      lib.dirtyfragMitigation = import ./dirtyfrag-mitigation.nix;
       lib.emacsWithPackages = import ./emacs-config.nix;
       lib.enableComma = import ./enable-comma.nix { inherit nix-index-database; };
 
