@@ -18,6 +18,7 @@
     {
       lib.userSettings = import ./user-settings.nix;
       lib.zshConfig = import ./zsh-config.nix;
+      lib.tmuxConfig = import ./tmux-config.nix;
       lib.systemdNetwork = import ./systemd-network.nix;
       lib.lanDns = import ./lan-dns.nix;
       lib.systemdBoot = import ./systemd-boot.nix;
