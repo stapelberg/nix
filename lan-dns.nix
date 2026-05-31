@@ -12,8 +12,6 @@
   services.resolved = {
     enable = true;
     domains = [ "lan" ];
-    extraConfig = ''
-      ResolveUnicastSingleLabel=yes
-    '';
+    settings.Resolve.ResolveUnicastSingleLabel = "yes";
   };
 }
