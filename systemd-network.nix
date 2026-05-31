@@ -3,7 +3,7 @@
 {
   services.resolved = {
     enable = true;
-    llmnr = "false";
+    settings.Resolve.LLMNR = "false";
   };
   networking.useDHCP = false;
   systemd.network.enable = true;
